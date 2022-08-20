@@ -9,21 +9,29 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+  <link rel="stylesheet" href="/css/styles_registro.css">
+  
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+  <main class="contenedor-aut">
+    <form class="formulario">
+        <img src="/img/login.png" alt="img_login" class="formulario-head">
+        <h1>Inicio de sesión</h1>
+        <div class="formulario-email">
+        <h5>Email</h5>
+        <input class="inpt-bar" type="email" id="email-inpt" placeholder="Email" >
+        <div class="formulario-invalido-email">Ingresa tu e-mail</div>
+        </div>
+    <div class="formulario-password">
+        <h5>Contraseña</h5>
+        <input class="inpt-bar" type="password" id="password-inpt"  placeholder="Contraseña">
+        <div class="formulario-invalido-pass">Ingresa tu contraseña</div>
+        
     </div>
-  </main>
+    <button class="btn btn-primary btn-lg" type="button" id="formulario-boton">Ingresar</button>
+        </form>
+    </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
