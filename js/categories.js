@@ -28,7 +28,7 @@ function sortCategories(criteria, array){
 
             if ( aCount > bCount ){ return -1; }
             if ( aCount < bCount ){ return 1; }
-            return 0;
+            return 0; 
         });
     }
 

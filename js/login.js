@@ -6,6 +6,7 @@ const email_error = document.querySelector('.formulario-invalido-email')
 
 
 
+
 boton.addEventListener('click', ()=>{
     if(email.value.length <= 0 && contrasena.value.length <= 0 ){
         email_error.style.display = "block";
@@ -20,10 +21,19 @@ boton.addEventListener('click', ()=>{
     }
     if(email.value.length >=1 && contrasena.value.length >=1){
         moveToHome()
+        
+    }
+})
 
-    }
-    })
+function moveToHome(){
+    location.href= "home.html"
+}
+
+
+boton.addEventListener('click',async() =>{
+    await localStorage.setItem('nombreUsuario', (email.value));
     
-    function moveToHome(){
-        location.href= "home.html"
-    }
+})
+
+
+
