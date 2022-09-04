@@ -30,8 +30,8 @@ function moveToHome(){
 }
 
 
-boton.addEventListener('click',async() =>{
-    await localStorage.setItem('nombreUsuario', (email.value));
+boton.addEventListener('click', () =>{
+   localStorage.setItem('nombreUsuario', (email.value));
     
 })
 
