@@ -41,8 +41,8 @@ let getJSONData = function(url){
     });
 }
 
-document.addEventListener('DOMContentLoaded', async() =>{
-  const usuarioName = await localStorage.getItem('nombreUsuario');
+document.addEventListener('DOMContentLoaded', () =>{
+  const usuarioName = localStorage.getItem('nombreUsuario');
   document.getElementById('navbar-usuario-name').innerHTML = usuarioName;
   
 
