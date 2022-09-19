@@ -5,11 +5,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+ 
 </head>
 
 <body>
@@ -31,17 +32,38 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="index.html" id="navbar-usuario-name">Usuario</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div  id="producto_info_contenedor" class="container"></div>
+    <div  id="comentario_contenedor" class="container">
+      <h4>Comentarios</h4>
     </div>
+    <div class="container"> 
+      <div class="row ">
+      <h4 class="m-2 p-0">Comentar</h4>
+          <div class="form-floating mb-2 col-6">
+              <p>Tu opinón:</p>
+              <form action="" >
+                  <textarea name="" id="comentario_inp" cols="50" rows="5" class="mb-2"></textarea>
+                  <p>Tu puntuación:</p>
+                  <select class=" mb-3"  id="puntaje_select" >
+                        <option selected>Seleccione un puntaje</option>
+                        <option value="1"  >1</option>
+                        <option value="2" >2</option>
+                        <option value="3" >3</option>
+                        <option value="4" >4</option>
+                        <option value="5" >5</option>
+                      </select>
+                      <button class="btn btn-primary d-flex" type="button" id="btn_comentario">Enviar</button>
+              </form>
+          </div>
+      </div>
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">

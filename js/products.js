@@ -6,7 +6,7 @@ let productos = [];
 
 
 function addProductos(){productos.forEach(producto => {
-    containerProductos.innerHTML += `<div class="list-group-item list-group-item-action cursor-active">
+    containerProductos.innerHTML += `<div class="list-group-item list-group-item-action cursor-active" onclick="setProductoID(${producto.id})">
     <div class="row">
     <div class="col-3">
     <img src="${producto.image}" alt="Imagen ref. del producto descripto." class="img-thumbnail">
@@ -106,3 +106,14 @@ async function getJSONData2(url){
         addProductos()
         
     }
+
+    /* Entrega 3 */
+    
+    function setProductoID(id) {    /* Con esta funcion agrego el id a la clave "productoID" en el localStorage,para llamar al a funcion, uso onclick
+    que agrego en la linea 9  */
+        localStorage.setItem("productoID", id);
+        window.location = "product-info.html"
+    }
+    
+    
+   
