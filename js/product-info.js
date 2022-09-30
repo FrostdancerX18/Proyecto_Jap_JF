@@ -5,7 +5,9 @@ const btnComentario = document.getElementById('btn_comentario');
 const nombreUser = localStorage.getItem('nombreUsuario');
 const comentario_contenedor = document.getElementById('comentario_contenedor');
 const calificacion_puntos = document.getElementById('puntaje_select');
-
+const contenedor_productos_relacionados = document.getElementById('cont_prod_relacionados');
+const productoJSON = getJSONData2(PRODUCT_INFO_URL + productoComentID + EXT_TYPE);
+const productoComentarioJSON = getJSONData2(PRODUCT_INFO_COMMENTS_URL + productoComentID + EXT_TYPE);
 listaComentarios =[];
 
 
@@ -31,7 +33,7 @@ async function getJSONData2(url){
 
 
 
-
+/* Comentarios */
 
 function comentariosArray(item_comentario){
     listaComentarios.push(item_comentario)
@@ -45,6 +47,31 @@ function ComentariosObject(nombre,fecha,comentario,puntaje){
     this.comentario =document.getElementById('comentario_inp').value;
     this.puntaje = calificacion_puntos.value
 } 
+
+document.addEventListener('DOMContentLoaded',async()=>{
+    productoComentario = await productoComentarioJSON ;
+
+productoComentario.forEach(element => {
+    
+    comentario_contenedor.innerHTML +=`<div class="container">
+    <ul class="list-group col-10 mb-4">
+    
+    <li class="list-group-item">
+    <div><span  class="fw-bold">${element.user}</span> - <span class="fst-italic">${element.dateTime
+    }</span></div>
+    <div class="m-2">
+    <p >Calificación - <span >${element.score}</span> / 5</p>
+    </div>
+    <div class="fst-normal">${element.description
+    }</div>
+    </li>
+    
+    </ul>
+    </div>`
+});
+
+})
+
 
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -86,7 +113,7 @@ btnComentario.onclick = () =>{
     location.href = location.href;
     
     puntaje()
-    console.log(puntaje)
+    
     
 }; 
 
@@ -97,37 +124,31 @@ btnComentario.onclick = () =>{
        
         
 
-
+/* Info del producto clickeado */
 document.addEventListener('DOMContentLoaded',async ()=>{
-    const productoJSON = getJSONData2(PRODUCTS_URL + categoria + EXT_TYPE)
+    
+    
     const productoID = localStorage.getItem('productoID')
-    const productoCat = await productoJSON;
-    let arrayProductoJson = await productoJSON;
-    arrayProductoJson = arrayProductoJson.products;
-    productoInfo = arrayProductoJson.filter(producto => producto.id == productoID)
+    let objProductoJson = await productoJSON;
     
     
-    
-    
-    productoInfo.forEach(element => {
-        
-        
     producto_info_contenedor.innerHTML =`<div class="row">
-    <h1 class="m-4">${element.name}</h1>
+    <h1 class="m-4">${objProductoJson.name}</h1>
     <hr>
     <h4><b>Precio</b></h4>
-    <p>UYU <span>${element.cost}</span></p>
+    <p>UYU <span>${objProductoJson.cost}</span></p>
     <h4><b>Descripción</b> </h4>
-    <p>${element.description}</p>
+    <p>${objProductoJson.description}</p>
     <h4><b>Categoria</b></h4>
-    <p>${productoCat.catName}</p>
+    <p>${objProductoJson.category}</p>
     <h4><b>Cantidad de vendidos</b></h4>
-    <p>${element.soldCount}</p>
+    <p>${objProductoJson.soldCount}</p>
     <h4><b>Imagen</b></h4>
     <div class="col">
-    <img class="col-3" src="${element.image}" alt="Aca va una imagen">
-    <img class="col-3" src="${element.image}" alt="Aca va otra imagen">
-    <img class="col-3" src="${element.image}" alt="Aca va otra imagen mas">
+    <img class="col-2 p-2" src="${objProductoJson.images[0]}" alt="Aca va una imagen">
+    <img class="col-2 p-2" src="${objProductoJson.images[1]}" alt="Aca va otra imagen">
+    <img class="col-2 p-2" src="${objProductoJson.images[2]}" alt="Aca va otra imagen mas">
+    <img class="col-2 p-2" src="${objProductoJson.images[3]}" alt="Aca va otra imagen mas">
     </div>
     
     <hr class="m-3">
@@ -137,5 +158,41 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 });
     
     
+
+
+function toNewProduct(id){
+    localStorage.setItem("productoID", id);
+    window.location = "product-info.html"
+}
+/* Productos relacionados */
+document.addEventListener('DOMContentLoaded',async()=>{
+    let listaRelacionados = await productoJSON;
+    listaRelacionados = listaRelacionados.relatedProducts ;
+    listaRelacionados.forEach(element => {
+        
+         contenedor_productos_relacionados.innerHTML +=`<div class="card m-1 cursor-active" style="width: 18rem;" onclick="toNewProduct(${element.id})">
+         <img src="${element.image}" class="card-img-top" alt="...">
+         <div class="card-body">
+         <p class="card-text">${element.name}</p>
+         </div>
+         </div>
+         ` 
+         
+     });
+        
 })
 
+
+
+
+
+
+/* Contenedores para imagenes relacionadas
+
+<div class="card m-1 cursor-active" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Producto relacionado-1</p>
+                </div>
+              </div>
+*/
