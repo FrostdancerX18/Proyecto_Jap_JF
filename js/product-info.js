@@ -187,12 +187,3 @@ document.addEventListener('DOMContentLoaded',async()=>{
 
 
 
-/* Contenedores para imagenes relacionadas
-
-<div class="card m-1 cursor-active" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <p class="card-text">Producto relacionado-1</p>
-                </div>
-              </div>
-*/
