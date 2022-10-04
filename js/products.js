@@ -1,25 +1,25 @@
 const categoria = localStorage.getItem('catID');
-const containerProductos = document.querySelector('.lista-productos-nuevos');
+const containerProductos = document.getElementById('lista-productos-nuevos');
 const btnFilter =document.getElementById('rangeFilterPrice');
 
 let productos = [];
 
 
 function addProductos(){productos.forEach(producto => {
-    containerProductos.innerHTML += `<div class="list-group-item list-group-item-action cursor-active" onclick="setProductoID(${producto.id})">
+    containerProductos.innerHTML += `<li class="articulos list-group-item list-group-item-action cursor-active" onclick="setProductoID(${producto.id})">
     <div class="row">
-    <div class="col-3">
+    <div class="col-3 ">
     <img src="${producto.image}" alt="Imagen ref. del producto descripto." class="img-thumbnail">
     </div>
     <div class="col">
     <div class="d-flex w-100 justify-content-between">
-    <h4 class="mb-1"> <span id="productoName">${producto.name}</span> - <span id="productoMoneda">${producto.currency}</span> <span id="productoPrice">${producto.cost}</span></h4>
-    <small class="text-muted"><span id="productoVentas">${producto.soldCount}</span> ventas</small>
+    <h4 class="mb-1"> <span >${producto.name}</span> - <span >${producto.currency}</span> <span >${producto.cost}</span></h4>
+    <small class="text-muted"><span >${producto.soldCount}</span> ventas</small>
     </div>
-    <p class="mb-1"><span id="productoDescripcion">${producto.description}</span></p>
+    <p class="mb-1"><span >${producto.description}</span></p>
     </div>
     </div>
-    </div>
+    </li>
     `;   
 });
 }
@@ -115,5 +115,17 @@ async function getJSONData2(url){
         window.location = "product-info.html"
     }
     
+
+
     
-   
+   /* Funcion para buscador de articulos- desafiate E2 */
+
+   document.addEventListener('keyup',(e)=>{
+    if(e.target.matches('#buscador_articulo')){
+        document.querySelectorAll('.articulos').forEach(articulo =>{
+            articulo.textContent.toLowerCase().includes(e.target.value)
+            ? articulo.classList.remove('filtro')
+            : articulo.classList.add('filtro');
+        })
+    }
+   })

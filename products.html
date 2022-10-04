@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/buscador_articulos.css">
 </head>
 
 <body>
@@ -63,8 +64,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+        <div class="col-lg-9 offset-lg-3 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
+            <div class="col">
+              <p class="font-weight-normal text-end my-2">Buscar</p>
+            </div>
+            <div class="col">
+              <input type="form-control" type="text" id="buscador_articulo">
+            </div>
             <div class="col">
               <p class="font-weight-normal text-end my-2">Precio</p>
             </div>
@@ -85,9 +92,10 @@
       </div>  <!--Hasta aca va lo nuevo-->
      
       <div class="row">
-          <div class=" lista-productos-nuevos list-group"> 
-      
-          </div>
+           <ul class="list-group" id='lista-productos-nuevos' >
+            
+           </ul>
+          
       </div>
           </div>
   </main>

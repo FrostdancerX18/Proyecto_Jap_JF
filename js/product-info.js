@@ -5,7 +5,7 @@ const btnComentario = document.getElementById('btn_comentario');
 const nombreUser = localStorage.getItem('nombreUsuario');
 const comentario_contenedor = document.getElementById('comentario_contenedor');
 const calificacion_puntos = document.getElementById('puntaje_select');
-const contenedor_productos_relacionados = document.getElementById('cont_prod_relacionados');
+const contenedor_productos_relacionados = document.getElementById('carousel_productos_relacionados');
 const productoJSON = getJSONData2(PRODUCT_INFO_URL + productoComentID + EXT_TYPE);
 const productoComentarioJSON = getJSONData2(PRODUCT_INFO_COMMENTS_URL + productoComentID + EXT_TYPE);
 listaComentarios =[];
@@ -33,7 +33,7 @@ async function getJSONData2(url){
 
 
 
-/* Comentarios */
+/* Comentarios y comentarios agragados por el usuario- desafiate E3 */
 
 function comentariosArray(item_comentario){
     listaComentarios.push(item_comentario)
@@ -170,17 +170,21 @@ document.addEventListener('DOMContentLoaded',async()=>{
     listaRelacionados = listaRelacionados.relatedProducts ;
     listaRelacionados.forEach(element => {
         
-         contenedor_productos_relacionados.innerHTML +=`<div class="card m-1 cursor-active" style="width: 18rem;" onclick="toNewProduct(${element.id})">
-         <img src="${element.image}" class="card-img-top" alt="...">
-         <div class="card-body">
-         <p class="card-text">${element.name}</p>
-         </div>
+         contenedor_productos_relacionados.innerHTML +=`
+         <div class="carousel-item active cursor-active" onclick="toNewProduct(${element.id})">
+         <img src="${element.image}" class="img-fluid d-block mx-auto mt-3" alt="..." width="400" height="auto">
+         <h5 class="text-center mt-4">${element.name}</h5>
+         
          </div>
          ` 
          
      });
         
 })
+
+
+
+
 
 
 
