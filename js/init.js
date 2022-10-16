@@ -57,5 +57,5 @@ function cierraSesion(){
   document.getElementById('navbar-usuario-name').innerHTML = '';
 }
 
-
-
+/* Funcion para establecer ID de usuario en Local Storage,no se solicita ni funciona de forma dinamica de momento */
+localStorage.setItem("Usuario_ID",25801);

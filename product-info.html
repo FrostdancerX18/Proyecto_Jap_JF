@@ -7,9 +7,11 @@
   <title>eMercado - Todo lo que busques está aquí</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+    
+
  
 </head>
 
@@ -35,7 +37,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbar-usuario-name"role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <ul class="dropdown-menu dropdown-menu-dark " aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
               <li><a class="dropdown-item" href="index.html" onclick="cierraSesion()">Cerrar sesión</a></li>
@@ -46,7 +48,13 @@
     </div>
   </nav>
   <main>
-    <div  id="producto_info_contenedor" class="container"></div>
+    <div class="container">
+      <div class="row justify-content-end">
+        <button type="button" class="btn btn-success col-3 mt-4 p-2 " id="boton_comprar">Comprar</button>
+      </div>
+      <div class="row " id="producto_info_contenedor">
+      </div>
+    </div>
     <div  id="comentario_contenedor" class="container">
       <h4>Comentarios</h4>
     </div>
@@ -110,11 +118,11 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
-  <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  
 </body>
 
 </html>

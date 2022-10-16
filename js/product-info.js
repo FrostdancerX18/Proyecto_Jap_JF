@@ -8,8 +8,9 @@ const calificacion_puntos = document.getElementById('puntaje_select');
 const contenedor_productos_relacionados = document.getElementById('carousel_productos_relacionados');
 const productoJSON = getJSONData2(PRODUCT_INFO_URL + productoComentID + EXT_TYPE);
 const productoComentarioJSON = getJSONData2(PRODUCT_INFO_COMMENTS_URL + productoComentID + EXT_TYPE);
+const btn_comprar = document.getElementById('boton_comprar');
 listaComentarios =[];
-
+let carrito =[];
 
 
 
@@ -118,6 +119,7 @@ btnComentario.onclick = () =>{
 }; 
 
 
+/* Funcion para comprar */
 
 
 
@@ -131,10 +133,85 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     const productoID = localStorage.getItem('productoID')
     let objProductoJson = await productoJSON;
     
+    /* Funcion para el boton de comprar */
+       /* Tengo el array vacio de carrito */
+    if(localStorage.getItem("Usuario_compra")){
+        carrito = JSON.parse(localStorage.getItem("Usuario_compra")) /* Aca hago que el array carrito tenga el contenido del localStorage */
+    }
+    else{
+        localStorage.setItem("Usuario_compra","")
+    }
     
-    producto_info_contenedor.innerHTML =`<div class="row">
-    <h1 class="m-4">${objProductoJson.name}</h1>
-    <hr>
+    console.log(carrito)
+    
+    
+        btn_comprar.addEventListener('click',()=>{
+       
+        itemObj ={
+            articles:{
+                count:1,
+                currency:`${objProductoJson.currency}`,
+                id:`${parseInt(objProductoJson.id)}`,
+                image:`${objProductoJson.images[0]}`,
+                name:`${objProductoJson.name}`,
+                unitCost:`${objProductoJson.cost}`
+            }
+        }
+                
+            
+            
+        
+        
+        if(carrito.length == 0){
+            
+            carrito.push(itemObj);
+            localStorage.setItem("Usuario_compra",JSON.stringify (itemObj));
+            
+        }
+        else if ( carrito.length > 0 ) { 
+                
+            /* Aca soluciono el problema de reprtir el articulo y en su lugar, aumenta la canitdad del mismo al darle varias veces a comprar */
+           for (let i = 0; i < carrito.length; i++) {       
+           if(carrito[i].articles.id == productoID){
+               carrito[i].articles.count ++;
+               
+               
+                localStorage.setItem("Usuario_compra",JSON.stringify (carrito)) 
+                       console.log("Tiene el mismo Id" )
+                       console.log(carrito)
+                       
+                   }
+        
+                   
+                }
+            } 
+            else  {
+
+            /* carrito.push(itemObj);
+            localStorage.setItem("Usuario_compra",JSON.stringify (carrito)); */
+            console.log("No tiene el mismo Id")
+            console.log(itemObj)
+            console.log(carrito)
+        }
+            
+
+                
+            
+                 
+                
+                
+                   
+               
+               
+        
+        
+})
+
+
+    
+    producto_info_contenedor.innerHTML =`
+    <h1 class=" col-8 m-2">${objProductoJson.name}</h1>
+    <hr class="m-2">
     <h4><b>Precio</b></h4>
     <p>UYU <span>${objProductoJson.cost}</span></p>
     <h4><b>Descripción</b> </h4>
@@ -181,6 +258,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
      });
         
 })
+
+
 
 
 

@@ -33,7 +33,7 @@ function moveToHome(){
 boton.addEventListener('click', () =>{
    localStorage.setItem('nombreUsuario', (email.value));
     
+   
 })
-
 
 
