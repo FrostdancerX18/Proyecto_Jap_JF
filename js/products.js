@@ -39,11 +39,7 @@ async function getJSONData2(url){
         console.error("error")
     }
 }
-/*document.addEventListener('DOMContentLoaded', async () =>{ //Con este evento espero a que se cargue el Html y luego puedo ejecutar la funcion//
-    const listaProductos = await getJSONData2(PRODUCTS_URL);
-    const containerProductos = document.querySelector('.lista-productos-nuevos');
-    const productos = listaProductos.products
-    document.querySelector('#catName').innerHTML = listaProductos.catName */
+
     
     document.addEventListener('DOMContentLoaded', async()=>{
         const listaProductos = await getJSONData2(PRODUCTS_URL + categoria + EXT_TYPE);

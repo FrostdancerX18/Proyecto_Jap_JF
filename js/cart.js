@@ -1,5 +1,8 @@
 const tablaCompras = document.getElementById('tabla_items');
+const btnVaciarCarrito = document.getElementById('boton_vaciarCarrito');
+
 let arrayCarrito = [];
+
 
 
 
@@ -23,90 +26,121 @@ cada archivo JS, por el momento lo dejo de esa forma para evitar romper otra cos
 
 
 
+/* Funcion para agregar item desde carrito */
+function addItemCarritoProd (array,tablaInner){
+    if(array.length >0){
+    array.forEach(element => {
+        tablaInner.innerHTML +=`<tr class="item_carrito" data-id="${element.id}"> 
+        <th scope="row col-2"><img src="${element.image}" alt="Imagen" class="w-25"></th>
+        <td class="col-2">${element.name}</td>
+        <td class="col-2">USD <span class="precioUnd">${element.unitCost}</span></td>
+        <td class="col-2"><input type="number"  value="${element.count}" min="1" class="cantidad_elemento col-2" ></td>
+        <td class="fw-bold col-2">USD <span class="subtotal">${element.unitCost*element.count}</span></td>
+        </tr>
+        
+        `
+    });
+}
+}
 
 /* Funcion para agregar item del JSON  */
 function addItemCarrito (array,tablaInner){
     array.forEach(element => {
         
-        tablaInner.innerHTML +=`<tr> 
+        tablaInner.innerHTML +=`<tr class="item_carrito" data-id="${element.id}"> 
         <th scope="row col-2"><img src="${element.image}" alt="Imagen" class="w-25"></th>
         <td class="col-2">${element.name}</td>
         <td class="col-2">USD <span class="precioUnd">${element.unitCost}</span></td>
-        <td class="col-2"><input type="number" value="${element.count}" min="1" class="col-2" "></td>
+        <td class="col-2"><input type="number" value="${element.count}" min="1" class="cantidad_elemento col-2" "></td>
         <td class="fw-bold col-2">USD <span class="subtotal">${element.unitCost*element.count}</span></td>
         </tr>`
         
     });
 
 }
-/* Funcion para agregar item desde carrito */
-function addItemCarritoProd (array,tablaInner){
-    
-    array.forEach(element => {
-        tablaInner.innerHTML +=`<tr class="item_carrito"> 
-        <th scope="row col-2"><img src="${element.articles.image}" alt="Imagen" class="w-25"></th>
-        <td class="col-2">${element.articles.name}</td>
-        <td class="col-2">USD <span class="precioUnd">${element.articles.unitCost}</span></td>
-        <td class="col-2"><input type="number"  value="${element.articles.count}" min="1" class="cantidad_elemento col-2" ></td>
-        <td class="fw-bold col-2">USD <span class="subtotal">${subtotal(element.articles.unitCost,element.articles.count)}</span></td>
-        </tr>
-        
-        `
-    });
-}
 
- /* Funcion para obtener subtotal */
-function subtotal (precio,cantidad){
-       
-    return precio*cantidad;
- }
+ 
 
- /* Funcion para modificar cantidades */
-function setCantidad(array,cantElem){
-    for (let i = 0; i < array.length; i++) {
-         let cantidadEle = array[i].articles.count;
-        array[i].articles.count = cantidadEle
-        
-        console.log(cantidadEle)
-        
-        
-    }
-};
+
     
         
-        
+   /* Aca carga el elemento del JSON y se adjunta al array con los elementos comprados dentro del Local Storage */     
 
 document.addEventListener('DOMContentLoaded', async()=>{
     const itemJson = await getJSONData2(CART_INFO_URL + (localStorage.getItem("Usuario_ID")) + EXT_TYPE); /* Usuario_ID lo genero en init.js */
     let articuloCompra = itemJson.articles
-    addItemCarrito(articuloCompra,tablaCompras)
-    document.addEventListener('click',()=>{
-        
-    })
+    for (let e = 0; e < articuloCompra.length; e++) {
+        objetoDeArtiCompra = articuloCompra[e]
+        if(arrayCarrito.some(item =>item.id == articuloCompra[e].id)){
+            
+            
+        }
+        else{
+
+            arrayCarrito.push(objetoDeArtiCompra)
+            
+        }
+    }
+    localStorage.setItem('Usuario_compra',JSON.stringify(arrayCarrito))
+    tablaCompras.innerHTML = '';
+    addItemCarritoProd(arrayCarrito,tablaCompras)
+   
 })
 
 
-
+/* Aca se cargan en el Html solamente los items comrpados que estan dentro de Local Storage */
 document.addEventListener('DOMContentLoaded',()=>{
     arrayCarrito = JSON.parse(localStorage.getItem('Usuario_compra'))
+    
     addItemCarritoProd(arrayCarrito,tablaCompras)
-    document.addEventListener('click',()=>{
+    
+    
+})
+
+
+
+/* Funcion para modificar cantidades de articulo y subtotal*/
+    document.getElementById('tabla_items').addEventListener('change',(e)=>{
+        let itemCarritoId = e.target.parentElement.parentElement
+        let itemCarritoIdHtml =itemCarritoId.getAttribute("data-id")
+        let cantidadItem = e.target.value
+        let itemNewCantidad = itemCarritoId.querySelector('.cantidad_elemento')
+        let itemNewSubTotal = itemCarritoId.querySelector('.subtotal')
+        for (let i = 0; i < arrayCarrito.length; i++) {
+            if(arrayCarrito[i].id == itemCarritoIdHtml){
+                arrayCarrito[i].count = parseInt(cantidadItem)
+                console.log(arrayCarrito[i].unitCost*arrayCarrito[i].count)
+                itemNewCantidad.setAttribute("value",arrayCarrito[i].count)
+                itemNewSubTotal.innerText = arrayCarrito[i].unitCost*arrayCarrito[i].count;
+            }
+            
+            localStorage.setItem('Usuario_compra',JSON.stringify(arrayCarrito))
+            
+            
+        
+        }
+        
+        
+           console.log(itemCarritoId)
+           console.log(itemNewCantidad.value)
+        
+        
+        
+        
+        
+        
+        
         
     })
     
-})
+
+/* Funcion para boton de vaciar carrito
+btnVaciarCarrito.addEventListener('click',()=>{
+    localStorage.setItem('Usuario_compra','');
+    addItemCarritoProd(arrayCarrito,tablaCompras)
+})*/
     
     
-tablaCompras.addEventListener('change',(e)=>{
-    const cantidadEle = parseInt(e.target.value)
-    
-    for (let n = 0; n < arrayCarrito.length; n++) {
-        arrayCarrito[n].articles.count = cantidadEle;
-        
-    }
-    
-    console.log(arrayCarrito)
-})
     
      
     
@@ -125,7 +159,6 @@ tablaCompras.addEventListener('change',(e)=>{
 
 
 
-/* const inputCantidadElemento = document.getElementsByClassName('cantidad_elemento')
-console.log(typeof inputCantidadElemento.value) */
+
 
 
