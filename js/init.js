@@ -9,6 +9,7 @@ const EXT_TYPE = ".json";
 
 
 
+
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -59,3 +60,15 @@ function cierraSesion(){
 
 /* Funcion para establecer ID de usuario en Local Storage,no se solicita ni funciona de forma dinamica de momento */
 localStorage.setItem("Usuario_ID",25801);
+
+/* Funcion para ver la cantidad de items en carrito 
+
+document.addEventListener('DOMContentLoaded',()=>{
+  let arrayCantCarrito = []
+  arrayCantCarrito =JSON.parse(localStorage.getItem('Usuario_compra')).length;
+  document.addEventListener('click',()=>{
+    document.getElementById('carrito_cantidad_icono').innerHTML = arrayCantCarrito
+    console.log(arrayCantCarrito)
+
+  })
+})*/
