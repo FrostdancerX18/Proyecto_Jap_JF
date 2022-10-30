@@ -189,3 +189,7 @@ a.custom-card:hover {
   color: orange;
 }
 
+.seleccion_pago,
+.datos_pago{
+  color: red;
+}

@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     <h1 class=" col-8 m-2">${objProductoJson.name}</h1>
     <hr class="m-2">
     <h4><b>Precio</b></h4>
-    <p>UYU <span>${objProductoJson.cost}</span></p>
+    <p>${objProductoJson.currency} <span>${objProductoJson.cost}</span></p>
     <h4><b>Descripción</b> </h4>
     <p>${objProductoJson.description}</p>
     <h4><b>Categoria</b></h4>
@@ -174,8 +174,8 @@ document.addEventListener('DOMContentLoaded',async ()=>{
 })
             
         
-            
-
+         
+      
                 
             
                  
@@ -243,11 +243,13 @@ btn_comprar.addEventListener('click',()=>{
     else{
         carrito = JSON.parse(localStorage.getItem('Usuario_compra'))
         comprarProducto(carrito,currentItem)
+        
         localStorage.setItem('Usuario_compra',JSON.stringify(carrito))
         
     }
 
     console.log(carrito)
+    console.log(currentItem)
     
     
 })

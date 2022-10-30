@@ -96,19 +96,28 @@
           </label>
         </div>
         <h3 class="pt-3 ">Dirección de envío</h3>
-        <form action="">
+        <form  action="" class="needs-validation" id="direccion_envio_form"  novalidate>
           <div class="container row">
           <div class=" col-6 mb-3">
             <label for="FormControlInput_calle" class="form-label">Calle</label>
-            <input type="text" class="form-control" id="FormControlInput_calle" >
+            <input type="text" class="form-control"  id="FormControlInput_calle" required>
+            <div class="invalid-feedback">
+              Ingrese una calle.
+            </div>
           </div>
           <div class=" col-4 mb-3">
             <label for="FormControlInput_numero" class="form-label">Número</label>
-            <input type="text" class="form-control" id="FormControlInput_numero" >
+            <input type="text" class="form-control" id="FormControlInput_numero" required>
+            <div class="invalid-feedback">
+              Ingrese un numero.
+            </div>
           </div>
           <div class=" col-6 mb-3">
             <label for="FormControlInput_esquina" class="form-label">Esquina</label>
-            <input type="text" class="form-control " id="FormControlInput_esquina" >
+            <input type="text" class="form-control " id="FormControlInput_esquina" required>
+            <div class="invalid-feedback">
+              Ingrese una esquina.
+            </div>
           </div>
         </div>
         </form>
@@ -136,15 +145,14 @@
       <div class="container">
         <h3 class="">Formas de pago</h3>
         <div class="row mt-4">
-          <p class="col-3 m-0" id="seleccion_formaPago_html">No ha seleccionado una forma de pago</p>
+          <p class="col-3 m-0" id="seleccion_formaPago_html">No ha seleccionado una forma de pago </p>
           <button type="button" class="btn btn-link col-2 p-0" data-bs-toggle="modal" data-bs-target="#forma_pago_modal">
             Seleccionar
           </button>
+          <div class="datos_pago fw-bold  d-none"><span>Datos incompletos!</span></div>
+          <div class="seleccion_pago d-none"><span >Debe seleccionar una forma de pago.</span></div>
           
         </div>
-
-
-<!-- Modal -->
 <div class="modal fade" id="forma_pago_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="forma_pago_modal_label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -153,9 +161,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="container" id="form_modal">
+        <div class="container" >
           
-          <form action="" >
+          <form action="" class="needs-validation" id="form_modal"  novalidate>
               <div class="form-check">
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="tarjCredit_check_radio">
                   <label class="form-check-label" for="tarjCredit_check_radio">
@@ -167,18 +175,18 @@
             <div class="container row" >
             <div class=" col-6 mb-3">
               <label for="numero_tarjeta_input_modal" class="form-label">Numero de tarjeta</label>
-              <input type="text" class="form-control" id="numero_tarjeta_input_modal">
+              <input type="text" class="form-control" id="numero_tarjeta_input_modal" required>
             </div>
             <div class=" col-6 mb-3">
               <label for="codigo_seguridad_input_modal" class="form-label">Codigo de seguridad</label>
-              <input type="email" class="form-control" id="codigo_seguridad_input_modal" >
+              <input type="text" class="form-control" id="codigo_seguridad_input_modal" required>
             </div>
             <div class=" col-6 mb-3">
               <label for="tarjeta_vencimiento_input_modal" class="form-label">Vencimiento</label>
-              <input type="month" class="form-control " id="tarjeta_vencimiento_input_modal" >
+              <input type="month" class="form-control " id="tarjeta_vencimiento_input_modal" required>
             </div>
           </div>
-      </fieldset>
+          </fieldset>
           <hr>
           <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="tansfBanc_check_radio">
@@ -188,25 +196,27 @@
           </div>
           <fieldset id="transfBancaria_modal">
             <div class=" col-6 mb-3">
-              <label for="tarjeta_vencimiento_input_modal" class="form-label">Numero de cuenta</label>
-              <input type="text" class="form-control " id="tarjeta_vencimiento_input_modal" >
+              <label for="banco_numero_input_modal" class="form-label">Numero de cuenta</label>
+              <input type="text" class="form-control " id="banco_numero_input_modal" required >
             </div>
           </fieldset>
             
-          </form>
-          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-        
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn_cerrar_modal">Cerrar</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
 
       </div>
+      <div class="alert alert-success d-none" role="alert">
+        Su compra se ha realizado con éxito!
+      </div>
       <div class="d-grid mt-4 p-2">
-        <button class="btn btn-primary mt-4 col">Finalizar compra</button>
+        <button type="submit" class="btn btn-primary mt-4 col" id="boton_finalizar_compra" >Finalizar compra</button>
 
       </div>
       
@@ -232,6 +242,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  
 </body>
 
 </html>
