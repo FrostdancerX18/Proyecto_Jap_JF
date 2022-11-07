@@ -8,7 +8,16 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
 
-
+/*  FUncion para realizar fetch y obtener el documento JSON */
+async function getJSONData2(url){
+  const respuesta = await fetch(url);
+  if(respuesta.ok){
+      const data = await respuesta.json();
+      return data;
+  }else{
+      console.error("error")
+  }
+}
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -47,28 +56,13 @@ let getJSONData = function(url){
 document.addEventListener('DOMContentLoaded', () =>{
   const usuarioName = localStorage.getItem('nombreUsuario');
   document.getElementById('navbar-usuario-name').innerHTML = usuarioName;
-  
-  
 })
 
 /* Parte de Entrega 4 */
 function cierraSesion(){
-
   localStorage.setItem('nombreUsuario','Usuario');
   document.getElementById('navbar-usuario-name').innerHTML = '';
 }
 
-/* Funcion para establecer ID de usuario en Local Storage,no se solicita ni funciona de forma dinamica de momento */
-localStorage.setItem("Usuario_ID",25801);
 
-/* Funcion para ver la cantidad de items en carrito 
 
-document.addEventListener('DOMContentLoaded',()=>{
-  let arrayCantCarrito = []
-  arrayCantCarrito =JSON.parse(localStorage.getItem('Usuario_compra')).length;
-  document.addEventListener('click',()=>{
-    document.getElementById('carrito_cantidad_icono').innerHTML = arrayCantCarrito
-    console.log(arrayCantCarrito)
-
-  })
-})*/

@@ -29,11 +29,8 @@ function moveToHome(){
     location.href= "home.html"
 }
 
-
 boton.addEventListener('click', () =>{
    localStorage.setItem('nombreUsuario', (email.value));
-    
-   
 })
 
 
