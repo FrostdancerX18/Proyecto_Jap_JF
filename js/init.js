@@ -6,6 +6,13 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+const $navbarUsuarioName = document.getElementById('navbar-usuario-name');
+const $listaCarrito = document.getElementById('lista_carrito');
+const $listaPerfil = document.getElementById('lista_perfil');
+const $listaCerrarSesion = document.getElementById('lista_cerrarSesion');
+
+
+
 
 
 /*  FUncion para realizar fetch y obtener el documento JSON */
@@ -53,16 +60,22 @@ let getJSONData = function(url){
     });
 }
 
+/*  Funcion para colocar nombre de usuario en el navbar ademas de E7-parte 1 */
 document.addEventListener('DOMContentLoaded', () =>{
   const usuarioName = localStorage.getItem('nombreUsuario');
-  document.getElementById('navbar-usuario-name').innerHTML = usuarioName;
+  if(localStorage.getItem('nombreUsuario') === ""){
+    $navbarUsuarioName.innerHTML = "-Ingrese usuario-"
+    $listaCarrito.classList.add('d-none')
+    $listaPerfil.innerHTML = '<a class="dropdown-item" href="index.html">-Ingresar usuario- </a>'
+    
+  }
+  else{
+    $navbarUsuarioName.innerHTML = usuarioName;
+  }
 })
-
-/* Parte de Entrega 4 */
+    
+ /* Parte de Entrega 4 */
 function cierraSesion(){
-  localStorage.setItem('nombreUsuario','Usuario');
+  localStorage.setItem('nombreUsuario','');
   document.getElementById('navbar-usuario-name').innerHTML = '';
 }
-
-
-

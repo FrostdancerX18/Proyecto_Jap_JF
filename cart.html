@@ -34,10 +34,10 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbar-usuario-name"role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-              <li><a class="dropdown-item" href="index.html" onclick="cierraSesion()">Cerrar sesión</a></li>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" >
+              <li id="lista_carrito"><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li id="lista_perfil"><a class="dropdown-item" href="my-profile.html" >Mi perfil</a></li>
+              <li id="lista_cerrarSesion"><a class="dropdown-item" href="index.html" onclick="cierraSesion()">Cerrar sesión</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -65,6 +65,7 @@
               <th scope="col">Costo</th>
               <th scope="col" class="w-25">Cantidad</th>
               <th scope="col">Subtotal</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody class="table-group-divider" id="tabla_items">

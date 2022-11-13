@@ -41,6 +41,7 @@ function addItemCarritoProd (array,tablaInner){
         <td class="col-2">${element.currency}<span class="precioUnd">${element.unitCost}</span></td>
         <td class="col-2"><input type="number"  value="${element.count}" min="1" class="cantidad_elemento col-2" ></td>
         <td class="fw-bold col-2 subtotal_main"><span class="subtotal_currency">${element.currency}</span><span class="subtotal">${element.unitCost*element.count}</span></td>
+        <td><button class="btn btn-outline-danger" onclick="eliminarItem(arrayCarrito,${element.id},tablaCompras)"><i class="bi bi-trash"></i></button></td>
         </tr>`
         }
         if(element.currency != "USD"){
@@ -50,6 +51,7 @@ function addItemCarritoProd (array,tablaInner){
             <td class="col-2">USD <span class="precioUnd">${Math.round(element.unitCost / 42)}</span></td>
             <td class="col-2"><input type="number" value="${element.count}" min="1" class="cantidad_elemento col-2" "></td>
             <td class="fw-bold col-2 subtotal_main"><span class="subtotal_currency">USD</span><span class="subtotal">${Math.round(element.unitCost / 42)*element.count}</span></td>
+            <td><button class="btn btn-outline-danger" onclick="eliminarItem(arrayCarrito,${element.id},tablaCompras)"><i class="bi bi-trash"></i></button></td>
             </tr>`  
         }
     });
@@ -103,7 +105,7 @@ function costoDeEnvio(){
     
     document.getElementById('cart_costo_envio').innerHTML = Math.round(subTotalParaEnvio*costoDeEnvio);
     
- } 
+} 
 
 /* E6-part_1 Funcion para calular el Total */
 function totalVenta(){
@@ -112,6 +114,24 @@ function totalVenta(){
     let total = envioCost + subCost;
     document.getElementById('cart_total').innerHTML = total;
   
+} 
+
+/*  DESAFIATE E6 -Funcion para eliminar items de forma individual */
+function eliminarItem(array,ID,tablaInner){
+    for (let i = 0; i < array.length; i++) {
+        if(array[i].id == ID){
+            array.splice(i,1)
+            localStorage.setItem('Usuario_compra',JSON.stringify(array))
+            tablaCompras.innerHTML = '';
+            addItemCarritoProd(array,tablaInner)
+            sumarSubTotales();
+            costoDeEnvio();
+            totalVenta();
+        }
+        
+    }
+    
+    
 }      
         
 /* Aca carga el elemento del JSON y se adjunta al array con los elementos comprados dentro del Local Storage */     
@@ -129,6 +149,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
     localStorage.setItem('Usuario_compra',JSON.stringify(arrayCarrito))
     tablaCompras.innerHTML = '';
     addItemCarritoProd(arrayCarrito,tablaCompras)
+    
 })
 
 /* Aca se cargan en el Html solamente los items comprados que estan dentro de Local Storage,tambien se ejecutan las funciones de los costos */
@@ -176,7 +197,7 @@ document.addEventListener('change',()=>{
     sumarSubTotales();
     costoDeEnvio();
     totalVenta();
-   })
+})
         
 /* Funcion para modal forma de pago */
 document.addEventListener('change',()=>{
@@ -253,10 +274,8 @@ btnCerrarModal.addEventListener('click',()=>{
 })
     
    
-     
  
-       
-        
+ 
 
 
 

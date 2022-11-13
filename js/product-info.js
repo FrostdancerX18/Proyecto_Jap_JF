@@ -20,7 +20,7 @@ const fechaHoy= fecha.toLocaleString();
 
 
 
-/* Comentarios y comentarios agragados por el usuario- desafiate E3 */
+/* DESAFIATE E3 - Comentarios y comentarios agragados por el usuario- */
 function comentariosArray(item_comentario){
     listaComentarios.push(item_comentario)
 }
@@ -37,7 +37,7 @@ function toNewProduct(id){
     window.location = "product-info.html"
 }
 
-/* Funcion para comprar producto */
+/* DESAFIATE E5_PARTE 1 - Funcion para comprar producto */
 function comprarProducto(array,producto){
      
     if(array.length == 0){
@@ -151,21 +151,24 @@ document.addEventListener('DOMContentLoaded',async ()=>{
     }
 })
             
-/* Productos relacionados */
+/* DESAFIATE E4 -Productos relacionados */
 document.addEventListener('DOMContentLoaded',async()=>{
     let listaRelacionados = await productoJSON;
     listaRelacionados = listaRelacionados.relatedProducts ;
     listaRelacionados.forEach(element => {
         
          contenedor_productos_relacionados.innerHTML +=`
-         <div class="carousel-item active cursor-active" onclick="toNewProduct(${element.id})">
-         <img src="${element.image}" class="img-fluid d-block mx-auto mt-3" alt="..." width="400" height="auto">
+         <div class="carousel-item cursor-active" >
+         <img src="${element.image}" class="img-fluid d-block mx-auto mt-3" alt="..." width="400" height="auto" onclick="toNewProduct(${element.id})">
          <h5 class="text-center mt-4">${element.name}</h5>
          </div>` 
         });
-})
-         
-/* Escucha en el boton de comprar para ejecutar la funcion de compra */
+        contenedor_productos_relacionados.firstElementChild.classList.add('active')
+    })
+    
+    
+      
+/* DESAFIATE E5_PARTE 2 - Escucha en el boton de comprar para ejecutar la funcion de compra */
 btn_comprar.addEventListener('click',()=>{
     comprarProducto(carrito,currentItem)
     if(localStorage.getItem('Usuario_compra') == ''){

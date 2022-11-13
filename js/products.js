@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
         
 })
 
-/* Funcion para buscador de articulos- desafiate E2 */
+/* DESAFIATE E2 -Funcion para buscador de articulos */
 document.addEventListener('keyup',(e)=>{
     if(e.target.matches('#buscador_articulo')){
         document.querySelectorAll('.articulos').forEach(articulo =>{
